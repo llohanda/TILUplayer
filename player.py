@@ -14,6 +14,7 @@ class VideoWindow(QMainWindow):
     def __init__(self, parent=None):
         super(VideoWindow, self).__init__(parent)
         self.setWindowTitle("TILU Media Player")
+        self.setWindowIcon(QIcon("icon.png"))
         self.mediaPlayers = []
         self.videoWidgets = []
         self.selector = []
