@@ -1,9 +1,9 @@
 # TILU media player
 
-Play up to three videos at once. No need to pause all videos one by one or using multiviewer that has no playback ability. Show only the frames that matters anytime.
+Play up to four videos at once. No need to pause all videos one by one or using multiviewer that has no playback ability. Show only the frames that matters anytime.
 
 ### Requirement
-- Python 3.7
+- Python >= 3.7 (untested on lower version; if it works on <= 3.6, let me know)
 - PyQt5 `$ pip install pyqt5`
 
 ### Running
@@ -14,9 +14,9 @@ Play up to three videos at once. No need to pause all videos one by one or using
 - Drag the slider to move throughout the video
 - To show selected videos only:
   - Go to the sidebar
-  - Uncheck the videos that won't be displayed. Uncheck all checkboxes will display all videos instead
+  - Uncheck the videos that won't be displayed.
   - Click `Display selected` or `Ctrl+D` to confirm your choices
 
 ### Important note
-- This media player was tested on three videos with same length. If yours has different length, please proceed with caution
-- Please report any problems by creating an issue or via [email](mailto:chocolate.coffee@outlook.com)
+- This media player was tested on four videos with same length. If your playlist has different length, please proceed with caution
+- Please report any problems by creating an issue or [email](mailto:chocolate.coffee@outlook.com) me.

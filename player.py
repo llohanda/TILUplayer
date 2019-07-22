@@ -4,10 +4,11 @@ from PyQt5.QtCore import QDir, Qt, QUrl
 from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
 from PyQt5.QtMultimediaWidgets import QVideoWidget
 from PyQt5.QtWidgets import (QApplication, QFileDialog, QHBoxLayout, QLabel,
-        QPushButton, QSizePolicy, QSlider, QStyle, QVBoxLayout, QWidget, QMainWindow,
-        QAction, QShortcut, QCheckBox, QGridLayout)
+                             QPushButton, QSizePolicy, QSlider, QStyle, QVBoxLayout, QWidget, QMainWindow,
+                             QAction, QShortcut, QCheckBox, QGridLayout)
 from PyQt5.QtGui import QIcon, QKeySequence
 import sys
+
 
 class VideoWindow(QMainWindow):
 
@@ -19,8 +20,9 @@ class VideoWindow(QMainWindow):
         self.videoWidgets = []
         self.selector = []
 
-        for i in range(3):
-            self.mediaPlayers.append(QMediaPlayer(None, QMediaPlayer.VideoSurface))
+        for i in range(4):
+            self.mediaPlayers.append(QMediaPlayer(
+                None, QMediaPlayer.VideoSurface))
             self.videoWidgets.append(QVideoWidget())
             self.mediaPlayers[i].setVideoOutput(self.videoWidgets[i])
 
@@ -30,10 +32,15 @@ class VideoWindow(QMainWindow):
         upperLayout.addWidget(self.videoWidgets[0])
         upperLayout.addWidget(self.videoWidgets[1])
 
+        bottomLayout = QHBoxLayout()
+        bottomLayout.setContentsMargins(0, 0, 0, 0)
+        bottomLayout.addWidget(self.videoWidgets[2])
+        bottomLayout.addWidget(self.videoWidgets[3])
+
         finalLayout = QVBoxLayout()
         finalLayout.setContentsMargins(0, 0, 0, 0)
         finalLayout.addLayout(upperLayout)
-        finalLayout.addWidget(self.videoWidgets[2])
+        finalLayout.addLayout(bottomLayout)
 
         # Create play button and shortcuts
         self.playButton = QPushButton()
@@ -49,7 +56,7 @@ class VideoWindow(QMainWindow):
 
         self.errorLabel = QLabel()
         self.errorLabel.setSizePolicy(QSizePolicy.Preferred,
-                QSizePolicy.Maximum)
+                                      QSizePolicy.Maximum)
 
         sidebar = QVBoxLayout()
         sidebar.insertSpacing(0, 100)
@@ -63,7 +70,7 @@ class VideoWindow(QMainWindow):
         openShortcut.activated.connect(self.openFile)
 
         # Checkboxes for displaying video
-        for i in range(3):
+        for i in range(4):
             boxId = str(i+1)
             checkbox = QCheckBox("Video &" + boxId, self)
             checkbox.setChecked(True)
@@ -112,7 +119,8 @@ class VideoWindow(QMainWindow):
                 w.hide()
 
     def openFile(self):
-        files, _ = QFileDialog.getOpenFileNames(self, "Select 3 Files", QDir.homePath())
+        files, _ = QFileDialog.getOpenFileNames(
+            self, "Select up to 4 files", QDir.homePath())
         for m, f in zip(self.mediaPlayers, files):
             m.setMedia(QMediaContent(QUrl.fromLocalFile(f)))
         self.playButton.setEnabled(True)
@@ -127,10 +135,10 @@ class VideoWindow(QMainWindow):
     def mediaStateChanged(self, state):
         if self.mediaPlayers[0].state() == QMediaPlayer.PlayingState:
             self.playButton.setIcon(
-                    self.style().standardIcon(QStyle.SP_MediaPause))
+                self.style().standardIcon(QStyle.SP_MediaPause))
         else:
             self.playButton.setIcon(
-                    self.style().standardIcon(QStyle.SP_MediaPlay))
+                self.style().standardIcon(QStyle.SP_MediaPlay))
 
     def positionChanged(self, position):
         self.positionSlider.setValue(position)
@@ -145,6 +153,7 @@ class VideoWindow(QMainWindow):
     def handleError(self):
         self.playButton.setEnabled(False)
         self.errorLabel.setText("Error: " + self.mediaPlayers[0].errorString())
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
