@@ -19,4 +19,4 @@ Play up to four videos at once. No need to pause all videos one by one or using 
 
 ### Important note
 - This media player was tested on four videos with same length. If your playlist has different length, please proceed with caution
-- Please report any problems by creating an issue or [email](mailto:chocolate.coffee@outlook.com) me.
+- Please report any problems by creating an issue or [email](mailto:livia.lohanda@gmail.com) me.
